@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:ez_book/src/models/books.dart';
+import 'package:ez_book/src/models/book.dart';
 import 'package:ez_book/src/pages/detail/detail.dart';
 import 'package:ez_book/src/pages/home/widget/category_title.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:ez_book/src/settings/settings_controller.dart';
 
 class TrendingMovies extends StatelessWidget {
   TrendingMovies({Key? key, required this.settingsController})
       : super(key: key);
-  final List<Books> moviesTrendingList = Books.generateItemsList();
+  final List<Book> moviesTrendingList = Book.generateItemsList();
   final SettingsController settingsController;
   @override
   Widget build(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
+
     return Column(
       children: [
-        const CategoryTitle(title: "Trending Books"),
+        CategoryTitle(title: tr().home_trending),
         ListView.separated(
           padding: const EdgeInsets.all(20),
           primary: false,
@@ -31,7 +37,8 @@ class TrendingMovies extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => DetailPage(
                     settingsController: settingsController,
-                    books: moviesTrendingList[index],
+                    tappedBook: moviesTrendingList[index],
+                    isLocal: true,
                   ),
                 ),
               ),

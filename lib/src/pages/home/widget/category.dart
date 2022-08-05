@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:ez_book/src/models/books.dart';
+import 'package:ez_book/src/models/book.dart';
 import 'package:ez_book/src/pages/detail/detail.dart';
 import 'package:ez_book/src/pages/home/widget/category_title.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:ez_book/src/settings/settings_controller.dart';
 
 class Category extends StatelessWidget {
   Category({Key? key, required this.settingsController}) : super(key: key);
-  final List<Books> booksRecommendedList = Books.generateCategoryList();
+  final List<Book> booksRecommendedList = Book.generateCategoryList();
   final SettingsController settingsController;
   @override
   Widget build(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
+
     Size _size = MediaQuery.of(context).size;
 
     return Column(
       children: [
-        const CategoryTitle(title: "Recommended Books"),
+        CategoryTitle(title: tr().home_recommend),
         SizedBox(
           height: _size.width > 900 ? 360 : 250,
           child: ListView.separated(
@@ -30,8 +36,9 @@ class Category extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => DetailPage(
-                      books: booksRecommendedList[index],
+                      tappedBook: booksRecommendedList[index],
                       settingsController: settingsController,
+                      isLocal: true,
                     ),
                   ),
                 ),

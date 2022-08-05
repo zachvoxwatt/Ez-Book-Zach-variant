@@ -1,4 +1,5 @@
 # Miscellaneous
+.vscode
 *.class
 *.log
 *.pyc
@@ -30,9 +31,15 @@
 .pub-cache/
 .pub/
 /build/
+windows/
+.windows/
+/windows/
 
 # Web related
 lib/generated_plugin_registrant.dart
+web/
+.web/
+/web/
 
 # Symbolication related
 app.*.symbols

@@ -1,0 +1,49 @@
+{
+  "appTitle": "Ez Book",
+  "@appTitle": {
+    "description": "Tương tác với những cuốn sách yêu thích của bạn chưa bao giờ là dễ dàng hơn!"
+  },
+
+  "tab_home": "Trang chủ",
+  "tab_ftb": "Sách đặc trưng",
+  "tab_reminder": "Ghi nhớ",
+  "tab_user": "Người dùng",
+  "tab_misc": "Đa dạng",
+
+  "home_search": "Tìm tên sách...",
+  "home_recommend": "Sách dành cho bạn",
+  "home_viewall": "Xem tất cả",
+  "home_trending": "Sách xu hướng",
+
+  "ftb_tip": "Gợi ý: Kéo xuống để làm mới danh sách!",
+  "ftb_book_genre": "Thể loại",
+  "ftb_poll_polling": "Đang lấy dữ liệu...",
+  "ftb_poll_success": "Thành công!",
+  "ftb_poll_retry": "Thử lại",
+  "ftb_poll_err_forbidden": "❌ Truy cập bị từ chối ❌\nKhông đủ quyền để thực hiện hành động",
+  "ftb_poll_err_unreachable": "❌ Không thể liên lạc với dịch vụ ❌",
+
+  "readview_add_to_lib": "Thêm vào tủ",
+  "readview_read_now": "Đọc ngay",
+  "readview_viewcount": "Lượt xem",
+
+  "user_signin": "Đăng nhập",
+  "user_reg": "Đăng ký",
+
+  "settings_title": "Cài đặt",
+  "settings_font": "Font chữ",
+  "settings_fontsize": "Kích cỡ",
+  "settings_darktheme": "Tối",
+  "settings_lighttheme": "Sáng",
+  "settings_confirm": "Hoàn tất",
+
+  "misc_apptheme": "Giao diện",
+  "misc_apptheme_change_dark": "Ứng dụng đã chuyển sang chế độ Tối",
+  "misc_apptheme_change_light": "Ứng dụng đã chuyển sang chế độ Sáng",
+  "misc_lang_change": "Thay đổi ngôn ngữ thành công",
+  "misc_font_settings": "Cài đặt Font",
+  "misc_font_settings_button": "Thay đổi",
+  "misc_font_settings_changed": "Đã áp dụng các sửa đổi!",
+  "misc_lang": "Ngôn ngữ"
+  
+}

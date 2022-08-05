@@ -1,9 +1,15 @@
+import 'package:ez_book/src/pages/misc/misc.dart';
 import 'package:flutter/material.dart';
 import 'package:ez_book/src/pages/home/widget/custom_app_bar.dart';
 import 'package:ez_book/src/pages/home/widget/movie_header.dart';
 import 'package:ez_book/src/pages/home/widget/category.dart';
 import 'package:ez_book/src/pages/home/widget/trending_movies.dart';
 import 'package:ez_book/src/settings/settings_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../size_config.dart';
+import '../ft_books/ft_books.dart';
+import '../reminder/reminder.dart';
+import '../user/user.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.settingsController})
@@ -29,15 +35,20 @@ class _HomePageState extends State<HomePage> {
           physics: const BouncingScrollPhysics(),
           children: [
             Home(settingsController: widget.settingsController),
-            const Center(child: Text("Book")),
-            const Center(child: Text("Column")),
-            const Center(child: Text("Person")),
+            FeaturedBooks(settingsController: widget.settingsController),
+            ReminderScreen(settingsController: widget.settingsController),
+            UserScreen(settingsController: widget.settingsController),
+            MiscellaneousScreen(settingsController: widget.settingsController)
           ]),
-      bottomNavigationBar: _buildBottonBar(),
+      bottomNavigationBar: _buildBottonBar(context),
     );
   }
 
-  BottomNavigationBar _buildBottonBar() {
+  BottomNavigationBar _buildBottonBar(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
+
     return BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
@@ -50,15 +61,21 @@ class _HomePageState extends State<HomePage> {
                   curve: Curves.easeIn);
             }),
         selectedItemColor: const Color(0xFF6741FF),
-        items: const [
+        items: [
           BottomNavigationBarItem(
-              label: 'Home', icon: Icon(Icons.home_rounded)),
+              label: tr().tab_home, icon: const Icon(Icons.home_rounded)),
           BottomNavigationBarItem(
-              label: 'Book', icon: Icon(Icons.menu_book_rounded)),
+              label: tr().tab_ftb, icon: const Icon(Icons.menu_book_rounded)),
           BottomNavigationBarItem(
-              label: 'Column', icon: Icon(Icons.view_week_outlined)),
+              label: tr().tab_reminder, icon: const Icon(Icons.event)),
           BottomNavigationBarItem(
-              label: 'Person', icon: Icon(Icons.person_outline)),
+              label: tr().tab_user, icon: const Icon(Icons.person)),
+          BottomNavigationBarItem(
+            label: tr().tab_misc,
+            icon: const Icon(
+              Icons.miscellaneous_services,
+            ),
+          )
         ]);
   }
 }
@@ -69,11 +86,26 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
+
     return SingleChildScrollView(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
+          Container(
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.only(
+                top: SizeConfig.screenHeight! * 0.0075,
+                left: SizeConfig.screenWidth! * 0.05,
+                right: SizeConfig.screenWidth! * 0.05),
+            child: Text(tr().tab_home,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: SizeConfig.screenWidth! * 0.1)),
+          ),
           CustomAppBar(settingsController: settingsController),
           MovieHeader(
             settingsController: settingsController,

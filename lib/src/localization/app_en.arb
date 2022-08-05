@@ -2,5 +2,48 @@
   "appTitle": "Ez Book",
   "@appTitle": {
     "description": "Easy access to all your favorite books"
-  }
+  },
+
+  "tab_home": "Home",
+  "tab_ftb": "Featured Books",
+  "tab_reminder": "Reminder",
+  "tab_user": "User",
+  "tab_misc": "Miscellaneous",
+
+  "home_search": "Search movie here...",
+  "home_recommend": "Recommended Books",
+  "home_viewall": "View All",
+  "home_trending": "Trending Books",
+
+  "ftb_tip": "TIP: Pull this section down to refresh the listings!",
+  "ftb_book_genre": "Genre",
+  "ftb_poll_polling": "Fetching...",
+  "ftb_poll_success": "Success!",
+  "ftb_poll_retry": "Try again",
+  "ftb_poll_err_forbidden": "❌ Access Denied ❌\nInsufficient permission",
+  "ftb_poll_err_unreachable": "❌ Could not reach the service ❌",
+
+  "readview_add_to_lib": "Add To Library",
+  "readview_read_now": "Read Now",
+  "readview_viewcount": "Read(s)",
+
+  "user_signin": "Sign In",
+  "user_reg": "Register",
+
+  "settings_title": "Settings",
+  "settings_font": "Font",
+  "settings_fontsize": "Font size",
+  "settings_darktheme": "Dark theme",
+  "settings_lighttheme": "Light theme",
+  "settings_confirm": "Done",
+
+  "misc_apptheme": "App Theme",
+  "misc_apptheme_change_dark": "Application is now in Dark mode",
+  "misc_apptheme_change_light": "Application is now in Light mode",
+  "misc_lang_change": "Language applied successfully",
+  "misc_font_settings": "Font Settings",
+  "misc_font_settings_button": "Change",
+  "misc_font_settings_changed": "Changes applied!",
+  "misc_lang": "Language"
+  
 }

@@ -1,14 +1,16 @@
+import 'package:ez_book/src/blocs/display_settings/display_settings_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:ez_book/src/models/books.dart';
+import 'package:ez_book/src/models/book.dart';
 import 'package:ez_book/src/pages/read/widget/bottom_sheet.dart';
 import 'package:ez_book/src/settings/settings_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReadPage extends StatefulWidget {
   const ReadPage(
-      {Key? key, required this.books, required this.settingsController})
+      {Key? key, required this.selectedBook, required this.settingsController})
       : super(key: key);
   final SettingsController settingsController;
-  final Books books;
+  final Book selectedBook;
 
   @override
   State<ReadPage> createState() => _ReadPageState();
@@ -16,11 +18,10 @@ class ReadPage extends StatefulWidget {
 
 class _ReadPageState extends State<ReadPage> {
   bool show = false;
-  TextStyle font = const TextStyle(
-      fontSize: 16, fontWeight: FontWeight.normal, fontFamily: 'Roboto');
 
   @override
   Widget build(BuildContext context) {
+    var dispState = BlocProvider.of<DisplaySettingsBloc>(context).state;
     return Scaffold(
       body: Scrollbar(
         child: CustomScrollView(
@@ -45,13 +46,13 @@ class _ReadPageState extends State<ReadPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.books.name.toString(),
+                    widget.selectedBook.name.toString(),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(widget.books.auther.toString(),
+                  Text(widget.selectedBook.auther.toString(),
                       style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
@@ -69,17 +70,16 @@ class _ReadPageState extends State<ReadPage> {
               builder: (context) => BottomSheetWidget(
                 settingsController: widget.settingsController,
                 settings: {
-                  'size': font.fontSize,
+                  'size': dispState.fontSize,
                   'theme': widget.settingsController.themeMode == ThemeMode.dark
                       ? true
                       : false,
-                  'font_name': font.fontFamily,
+                  'font_name': dispState.fontFamily,
                 },
                 onClickedClose: () => setState(() {
                   show = false;
                 }),
                 onClickedConfirm: (value) => setState(() {
-                  font = value;
                   show = false;
                 }),
               ),
@@ -90,16 +90,21 @@ class _ReadPageState extends State<ReadPage> {
   }
 
   Widget _buildContent(BuildContext context) {
+    var dispState = BlocProvider.of<DisplaySettingsBloc>(context).state;
+
     return SliverToBoxAdapter(
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-              widget.books.content.toString(),
+              widget.selectedBook.content.toString(),
               textDirection: TextDirection.ltr,
               textAlign: TextAlign.justify,
-              style: font,
+              style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontSize: dispState.fontSize,
+                  fontFamily: dispState.fontFamily),
             ),
           )
         ],

@@ -1,17 +1,28 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:ez_book/src/models/books.dart';
+import 'package:ez_book/src/models/book.dart';
 import 'package:ez_book/src/pages/read/read.dart';
 import 'package:ez_book/src/settings/settings_controller.dart';
 import 'package:readmore/readmore.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage(
-      {Key? key, required this.books, required this.settingsController})
+      {Key? key,
+      required this.tappedBook,
+      required this.settingsController,
+      required this.isLocal})
       : super(key: key);
-  final Books books;
+  final bool isLocal;
+  final Book tappedBook;
   final SettingsController settingsController;
   @override
   Widget build(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -79,13 +90,16 @@ class DetailPage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Hero(
-                          tag: books,
-                          child: Image.asset(
-                            'assets/images/' + books.imgUrl.toString(),
-                            fit: BoxFit.cover,
-                            width: 150,
-                            height: 220,
-                          ),
+                          tag: tappedBook,
+                          child: !isLocal
+                              ? Image.network(
+                                  tappedBook.imgUrl!,
+                                  fit: BoxFit.cover,
+                                  width: 150,
+                                  height: 220,
+                                )
+                              : Image.asset(
+                                  'assets/images/${tappedBook.imgUrl}'),
                         ),
                       ),
                     ),
@@ -93,7 +107,7 @@ class DetailPage extends StatelessWidget {
                       height: 12,
                     ),
                     Text(
-                      books.name.toString(),
+                      tappedBook.name.toString(),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
@@ -103,7 +117,7 @@ class DetailPage extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      books.auther.toString(),
+                      tappedBook.auther.toString(),
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 16,
@@ -124,7 +138,8 @@ class DetailPage extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          books.score.toString() + '(${books.review})',
+                          tappedBook.score.toString() +
+                              '(${tappedBook.review})',
                           style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
@@ -142,8 +157,8 @@ class DetailPage extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          numberFormat(int.parse(books.view.toString())) +
-                              " Read",
+                          numberFormat(int.parse(tappedBook.view.toString())) +
+                              " ${tr().readview_viewcount}",
                           style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
@@ -154,9 +169,8 @@ class DetailPage extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: books.type!
+                    Wrap(
+                      children: tappedBook.type!
                           .map((e) => Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 5),
@@ -170,7 +184,7 @@ class DetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     ReadMoreText(
-                      books.desc.toString(),
+                      tappedBook.desc.toString(),
                       trimLines: 5,
                       textAlign: TextAlign.justify,
                       colorClickableText: Colors.pink,
@@ -192,18 +206,20 @@ class DetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _buildEvelatedButton(
-                            Icons.add, "Add To Library", Colors.grey.shade800,
-                            () {
-                          print("Add To Library.");
-                        }),
+                            Icons.add,
+                            tr().readview_add_to_lib,
+                            Colors.grey.shade800,
+                            () {}),
                         const SizedBox(
                           width: 15,
                         ),
-                        _buildEvelatedButton(Icons.menu_book, "Read Now",
+                        _buildEvelatedButton(
+                            Icons.menu_book,
+                            tr().readview_read_now,
                             const Color(0xFF6741FF), () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ReadPage(
-                                    books: books,
+                                    selectedBook: tappedBook,
                                     settingsController: settingsController,
                                   )));
                         }),

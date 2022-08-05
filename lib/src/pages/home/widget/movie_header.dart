@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ez_book/src/models/books.dart';
+import 'package:ez_book/src/models/book.dart';
 import 'package:ez_book/src/pages/detail/detail.dart';
 import 'package:ez_book/src/settings/settings_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -8,7 +8,7 @@ import 'dart:async';
 class MovieHeader extends StatefulWidget {
   MovieHeader({Key? key, required this.settingsController}) : super(key: key);
 
-  final List<Books> moviesHeaderList = Books.generateHeaderList();
+  final List<Book> moviesHeaderList = Book.generateHeaderList();
   final SettingsController settingsController;
   @override
   State<MovieHeader> createState() => _MovieHeaderState();
@@ -62,7 +62,8 @@ class _MovieHeaderState extends State<MovieHeader> {
                           MaterialPageRoute(
                             builder: (context) => DetailPage(
                               settingsController: widget.settingsController,
-                              books: e,
+                              tappedBook: e,
+                              isLocal: true,
                             ),
                           ),
                         ),

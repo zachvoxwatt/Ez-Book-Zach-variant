@@ -1,5 +1,8 @@
+import 'package:ez_book/src/blocs/display_settings/display_settings_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:ez_book/src/settings/settings_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomSheetWidget extends StatefulWidget {
   final Function(TextStyle) onClickedConfirm;
@@ -19,16 +22,10 @@ class BottomSheetWidget extends StatefulWidget {
 }
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
-  double _rating = 16;
   bool isSwitched = false;
-  String _dropDownValue = 'Roboto';
-  String _fontFamily = 'Roboto';
 
   getSetting() {
-    _rating = widget.settings['size'];
     isSwitched = widget.settings['theme'];
-    _dropDownValue = _getFontFamilyName(widget.settings['font_name']);
-    _fontFamily = _getFontFamily(widget.settings['font_name']);
   }
 
   @override
@@ -39,6 +36,10 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
+
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -47,17 +48,18 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(
+            children: [
+              const Icon(
                 Icons.settings,
                 size: 22,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(
-                "Settings",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                tr().settings_title,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               )
             ],
@@ -67,48 +69,56 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             color: Colors.grey[800],
             height: 35,
           ),
-          const Text(
-            "Font",
+          Text(
+            tr().settings_font,
             textAlign: TextAlign.center,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: DropdownButton<String>(
-                isExpanded: true,
-                iconSize: 16,
-                value: _dropDownValue,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _dropDownValue = newValue!;
-                    _fontFamily = _getFontFamily(newValue);
-                  });
-                },
-                items: <String>[
-                  'Roboto',
-                  'Gideon Roman',
-                  'Noto Serif',
-                  'Redressed'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                      value: value, child: _builditemText(value));
-                }).toList()),
+            child: BlocBuilder<DisplaySettingsBloc, DisplaySettingsState>(
+              builder: (context, ffstate) {
+                return DropdownButton<String>(
+                    isExpanded: true,
+                    iconSize: 16,
+                    value: ffstate.fontFamily,
+                    onChanged: (newValue) {
+                      context.read<DisplaySettingsBloc>().add(
+                          DisplaySettingsChange(
+                              fontSize: ffstate.fontSize,
+                              fontFamily: newValue!));
+                    },
+                    items: <String>[
+                      'Roboto',
+                      'Gideon Roman',
+                      'Noto Serif',
+                      'Redressed'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                          value: value,
+                          child:
+                              Text(value, style: TextStyle(fontFamily: value)));
+                    }).toList());
+              },
+            ),
           ),
-          const Text(
-            "Font size",
+          Text(
+            tr().settings_fontsize,
             textAlign: TextAlign.center,
           ),
-          Slider(
-            value: _rating,
-            onChanged: (newRating) {
-              setState(() {
-                _rating = newRating;
-              });
-            },
-            min: 12,
-            max: 32,
-            divisions: 12,
-            label: '${_rating.floor()}',
-          ),
+          BlocBuilder<DisplaySettingsBloc, DisplaySettingsState>(
+              builder: ((context, fsstate) {
+            return Slider(
+              value: fsstate.fontSize,
+              onChanged: (newRating) {
+                context.read<DisplaySettingsBloc>().add(DisplaySettingsChange(
+                    fontSize: newRating, fontFamily: fsstate.fontFamily));
+              },
+              min: 12,
+              max: 32,
+              divisions: 12,
+              label: '${fsstate.fontSize.floor()}',
+            );
+          })),
           Divider(
             thickness: 1,
             color: Colors.grey[800],
@@ -118,7 +128,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                const Text('Dark theme'),
+                Text(tr().settings_darktheme),
                 const Spacer(),
                 Switch(
                   value: isSwitched,
@@ -140,24 +150,18 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
           const SizedBox(
             height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildEvelatedButton(Icons.cancel, "Close", Colors.grey.shade800,
-                  () => widget.onClickedClose()),
-              const SizedBox(
-                width: 15,
-              ),
-              _buildEvelatedButton(
-                  Icons.save,
-                  "Save",
-                  const Color(0xFF6741FF),
-                  () => widget.onClickedConfirm(TextStyle(
-                      fontSize: _rating,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: _fontFamily))),
-            ],
-          )
+          _buildEvelatedButton(
+              Icons.save,
+              tr().settings_confirm,
+              const Color(0xFF6741FF),
+              () => widget.onClickedConfirm(TextStyle(
+                  fontSize: BlocProvider.of<DisplaySettingsBloc>(context)
+                      .state
+                      .fontSize,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: BlocProvider.of<DisplaySettingsBloc>(context)
+                      .state
+                      .fontFamily))),
         ],
       ),
     );
@@ -197,70 +201,4 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
           ),
         ),
       );
-
-  Widget _builditemText(String value) {
-    switch (value) {
-      case 'Roboto':
-        return Text(
-          value,
-          style: const TextStyle(fontFamily: 'Roboto'),
-        );
-      case 'Gideon Roman':
-        return Text(
-          value,
-          style: const TextStyle(fontFamily: 'Gideon_Roman'),
-        );
-      case 'Noto Serif':
-        return Text(
-          value,
-          style: const TextStyle(fontFamily: 'Noto_Serif'),
-        );
-      case 'Redressed':
-        return Text(
-          value,
-          style: const TextStyle(fontFamily: 'Redressed'),
-        );
-
-      default:
-        return const Text('null');
-    }
-  }
-}
-
-String _getFontFamily(String fontName) {
-  switch (fontName) {
-    case 'Roboto':
-      return 'Roboto';
-
-    case 'Gideon Roman':
-      return 'Gideon_Roman';
-
-    case 'Noto Serif':
-      return 'Noto_Serif';
-
-    case 'Redressed':
-      return 'Redressed';
-
-    default:
-      return 'Roboto';
-  }
-}
-
-String _getFontFamilyName(String fontName) {
-  switch (fontName) {
-    case 'Roboto':
-      return 'Roboto';
-
-    case 'Gideon_Roman':
-      return 'Gideon Roman';
-
-    case 'Noto_Serif':
-      return 'Noto Serif';
-
-    case 'Redressed':
-      return 'Redressed';
-
-    default:
-      return 'Roboto';
-  }
 }
