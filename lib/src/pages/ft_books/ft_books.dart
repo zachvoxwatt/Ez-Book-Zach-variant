@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../size_config.dart';
 import '../../models/book.dart';
 import '../../settings/settings_controller.dart';
 import 'widget/thumbnail.dart';
@@ -23,60 +24,65 @@ class FeaturedBooks extends StatelessWidget {
       context.read<BookBloc>().add(BookLoadEvent());
     }
 
-    return Container(
-        padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top,
-            bottom: MediaQuery.of(context).padding.bottom),
-        width: SizeConfig.screenWidth! - (SizeConfig.screenWidth! * 2 * 0.04),
-        height: SizeConfig.screenHeight! * 0.5,
-        child: RefreshIndicator(
-            onRefresh: () async {
-              return Future.delayed(const Duration(milliseconds: 100), () {
-                context.read<BookBloc>().add(BookLoadEvent());
-              });
-            },
-            child: SingleChildScrollView(
-                child: Column(children: [
-              Container(
-                alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(
-                    top: SizeConfig.screenHeight! * 0.0075,
-                    left: SizeConfig.screenWidth! * 0.05,
-                    right: SizeConfig.screenWidth! * 0.05),
-                child: Text(tr().tab_ftb,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.screenWidth! * 0.1)),
-              ),
-              Container(
-                  margin: EdgeInsets.only(
-                      left: SizeConfig.screenWidth! * 0.05,
-                      right: SizeConfig.screenWidth! * 0.05,
-                      bottom: SizeConfig.screenHeight! * 0.025),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    tr().ftb_tip,
-                    style: const TextStyle(fontStyle: FontStyle.italic),
-                  )),
-              BlocBuilder<BookBloc, BookState>(
-                builder: ((context, state) {
-                  if (state is BookLoaded) {
-                    return resultWidget(context, state.books);
-                  }
-                  if (state is BookErrorForbidden) {
-                    return errorWidget(context, tr().ftb_poll_err_forbidden);
-                  }
-                  if (state is BookErrorNoConnection) {
-                    return errorWidget(context, tr().ftb_poll_err_unreachable);
-                  }
-                  if (state is BookPollSuccess) {
-                    return pollSuccessWidget(context);
-                  }
+    return GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top,
+                bottom: MediaQuery.of(context).padding.bottom),
+            width:
+                SizeConfig.screenWidth! - (SizeConfig.screenWidth! * 2 * 0.04),
+            height: SizeConfig.screenHeight! * 0.5,
+            child: RefreshIndicator(
+                onRefresh: () async {
+                  return Future.delayed(const Duration(milliseconds: 100), () {
+                    context.read<BookBloc>().add(BookLoadEvent());
+                  });
+                },
+                child: SingleChildScrollView(
+                    child: Column(children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    margin: EdgeInsets.only(
+                        top: SizeConfig.screenHeight! * 0.0075,
+                        left: SizeConfig.screenWidth! * 0.05,
+                        right: SizeConfig.screenWidth! * 0.05),
+                    child: Text(tr().tab_ftb,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: SizeConfig.screenWidth! * 0.1)),
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(
+                          left: SizeConfig.screenWidth! * 0.05,
+                          right: SizeConfig.screenWidth! * 0.05,
+                          bottom: SizeConfig.screenHeight! * 0.025),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        tr().ftb_tip,
+                        style: const TextStyle(fontStyle: FontStyle.italic),
+                      )),
+                  BlocBuilder<BookBloc, BookState>(
+                    builder: ((context, state) {
+                      if (state is BookLoaded) {
+                        return resultWidget(context, state.books);
+                      }
+                      if (state is BookErrorForbidden) {
+                        return errorWidget(
+                            context, tr().ftb_poll_err_forbidden);
+                      }
+                      if (state is BookErrorNoConnection) {
+                        return errorWidget(
+                            context, tr().ftb_poll_err_unreachable);
+                      }
+                      if (state is BookPollSuccess) {
+                        return pollSuccessWidget(context);
+                      }
 
-                  return pollingWidget(context);
-                }),
-              )
-            ]))));
+                      return pollingWidget(context);
+                    }),
+                  )
+                ])))));
   }
 
   Container resultWidget(BuildContext context, List<Book> bookList) {

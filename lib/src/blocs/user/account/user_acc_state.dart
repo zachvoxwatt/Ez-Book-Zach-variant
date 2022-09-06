@@ -5,8 +5,6 @@ abstract class UserAccountState {}
 
 class UserAccountInitial extends UserAccountState {}
 
-class UserAccountSignedOut extends UserAccountState {}
-
 class UserAccountSignedIn extends UserAccountState {
   final User user;
 
@@ -14,8 +12,8 @@ class UserAccountSignedIn extends UserAccountState {
 }
 
 class UserAccountSignInError extends UserAccountState {
-  final String errorMessage;
-  UserAccountSignInError({required this.errorMessage});
+  final int errorCode;
+  UserAccountSignInError({required this.errorCode});
 }
 
 class UserAccountSignInSuccess extends UserAccountState {}
@@ -26,12 +24,15 @@ class UserAccountRegistryInitial extends UserAccountState {}
 
 class UserAccountRegistryWaiting extends UserAccountState {}
 
+class UserAccountRegistryNoConnection extends UserAccountState {}
+
 class UserAccountRegistrySuccess extends UserAccountState {}
 
 class UserAccountRegistryFailed extends UserAccountState {
   final List<String> errorLog;
+  final int errorCode;
 
-  UserAccountRegistryFailed({required this.errorLog});
+  UserAccountRegistryFailed({required this.errorLog, required this.errorCode});
 }
 
 class UserAccountRegistryUpdated extends UserAccountState {
@@ -39,5 +40,28 @@ class UserAccountRegistryUpdated extends UserAccountState {
       {required username,
       required password,
       required phone,
-      required displayName});
+      required displayname});
 }
+
+//class UserAccountEditUpdate extends UserAccountState {}
+
+class UserAccountEditWorking extends UserAccountState {}
+
+class UserAccountEditSuccess extends UserAccountState {
+  final User user;
+  UserAccountEditSuccess({required this.user});
+}
+
+class UserAccountEditFailed extends UserAccountState {
+  final int errorCode;
+
+  UserAccountEditFailed({required this.errorCode});
+}
+
+class UserAccountEditTypoError extends UserAccountState {}
+
+class UserAccountEditNoConnection extends UserAccountState {}
+
+class UserAccountEditSameInfo extends UserAccountState {}
+
+class UserAccountEditToInitial extends UserAccountState {}

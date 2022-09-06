@@ -8,3 +8,17 @@ class UserInfoSetEvent extends UserInfoEvent {
 
   UserInfoSetEvent({required this.user});
 }
+
+class UserInfoTransformInitial extends UserInfoEvent {}
+
+class UserInfoSignOutEvent extends UserInfoEvent {
+  final Object requiredInfo;
+
+  UserInfoSignOutEvent({required this.requiredInfo});
+}
+
+class UserInfoDeleteEvent extends UserInfoEvent {
+  final Object requiredInfo;
+
+  UserInfoDeleteEvent({required this.requiredInfo});
+}

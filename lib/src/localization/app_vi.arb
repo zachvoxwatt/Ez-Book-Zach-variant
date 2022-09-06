@@ -27,8 +27,70 @@
   "readview_read_now": "Đọc ngay",
   "readview_viewcount": "Lượt xem",
 
-  "user_signin": "Đăng nhập",
-  "user_reg": "Đăng ký",
+  "user_signin_button": "Đăng nhập",
+  "user_signin_username_label": "Tài khoản",
+  "user_signin_password_label": "Mật khẩu",
+  "user_signin_signin_button_label": "Đăng nhập",
+  "user_signin_back_button_label": "Trở về",
+  "user_signin_reg_alt1": "Bạn chưa có tài khoản?",
+  "user_signin_reg_alt2": "Đăng ký tại đây!",
+
+  "user_signin_err_neg1": "Không thể kết nối với máy chủ. Vui lòng thử lại sau!",
+  "user_signin_err_101": "Sai tài khoản / mật khẩu",
+  "user_signin_err_200": "Bắt buộc phải có tài khoản",
+  "user_signin_err_201": "Bắt buộc phải có mật khẩu",
+  
+  "user_signedin_info_label": "Thông tin cá nhân của bạn (nhấn vào để chọn và thay đổi thông tin):",
+  "user_signedin_username_label": "Tài khoản",
+  "user_signedin_password_label": "Mật khẩu",
+  "user_signedin_displayname_label": "Tên hiển thị",
+  "user_signedin_phone_label": "Số điện thoại",  
+  "user_signedin_token_tip": "Mã định dạng Token app (đừng chia sẻ thông tin này cho ai khác ngoài những người có phận sự!):",
+  "user_signedin_delete_option": "Xóa tài khoản",
+  "user_signedin_edit_label_prefix": "Chỉnh sửa",
+  "user_signedin_edit_err_typo": "Đã có lỗi xảy ra. Khả năng cao là một trong những lỗi đánh chữ sau đây:\n\n\u2022 Các khoảng trống\n\u2022 Những kí tự đặc biệt (không thuộc chữ cái Latin và các số tự nhiên cơ bản)\n\u2022 Dữ liệu được nhập vô miền không đúng định dạng\n\nVui lòng hãy kiểm tra và thử lại!",
+  "user_signedin_edit_err_sameinfo": "\u2022 Giá trị mới của miền này giống với giá trị đang hiện hữu!\n\u2022 Không có sửa đổi nào được thực hiện",
+  "user_signedin_delete_err": "Đã có lỗi xảy ra trong khi xóa tài khoản của bạn. Vui lòng thử lại sau!",
+
+  "user_signedin_delete_dialog_label": "Xóa tài khoản",
+  "user_signedin_delete_dialog_warn1": "Bạn có chắc chứ?",
+  "user_signedin_delete_dialog_warn2": "Hành động này không thể được khôi phục!",
+  "user_signedin_delete_button1_label": "Tiếp tục",
+  "user_signedin_delete_button2_label": "Trở về",
+  
+  "user_update_err_neg1": "Không thể kết nối với máy chủ. Vui lòng thử lại sau!",
+  "user_update_err_202": "Tên tài khoản này đang có người sử dụng!",
+
+  "user_signout_wait": "Đang đăng xuất. Xin chờ giây lát...",
+  "user_signout_msg": "Bạn đã đăng xuất",
+  "user_signout_deleted_pending": "Đang đăng xuất và xóa tài khoản của bạn...",
+  "user_signout_deleted_msg": "Tài khoản của bạn đã bị xóa",
+  "user_signout_button": "Đăng xuất",
+  
+  "user_reg_button": "Đăng ký",
+  "user_reg_cancel_button": "Hủy",
+  "user_reg_success": "Đăng ký thành công!\nVui lòng đăng nhập để tiếp tục", "user_reg_username_label": "Tài khoản",
+  "user_reg_password_label": "Mật khẩu",
+  "user_reg_displayname_label": "Tên hiển thị",
+  "user_reg_phone_label": "Số điện thoại (KHÔNG BẮT BUỘC)",
+  "user_reg_alt_signin_1": "Bạn đã có tài khoản?",
+  "user_reg_alt_signin_2": "Đăng nhập tại đây!",
+  "user_reg_err_username_length": "Tài khoản quá dài hoặc quá ngắn! Dữ liệu hợp lệ phải trong khoảng từ 6 - 30 kí tự!",
+  "user_reg_err_username_regexp": "Tài khoản có chứa những kí tự đặc biệt không hợp lệ hoặc khoảng trống! Dữ liệu hợp lệ chứa các chữ cái Latin, 10 số tự nhiên cơ bản, dấu gạch dưới và dấu chấm",
+  "user_reg_err_username_nodata": "Không có dữ liệu nhập vào ở miền Tài khoản",
+
+  "user_reg_err_password_length": "Mật khẩu quá ngắn! Dữ liệu hợp lệ phải từ 6 kí tự trở đi!",
+  "user_reg_err_password_regexp": "Mật khẩu có chứa những kí tự đặc biệt không hợp lệ hoặc khoảng trống! Dữ liệu hợp lệ chứa các chữ cái Latin, 10 số tự nhiên cơ bản, dấu gạch dưới và dấu chấm",
+  "user_reg_err_password_nodata": "Không có dữ liệu nhập vào ở miền Mật khẩu",
+
+  "user_reg_err_phone_foulformat": "Số điện thoại không trùng khớp với định dạng hoặc có khoảng trống! Dữ liệu hợp lệ chứa 10 số tự nhiên cơ bản và / hoặc dấu (+) ở đầu số!",
+
+  "user_reg_err_displayname_nodata": "Không có dữ liệu nhập vào ở miền Tên hiển thị",
+
+  "user_reg_err_neg1": "Không thể kết nối với máy chủ. Vui lòng thử lại sau!",
+  "user_reg_err_200": "Tài khoản không hợp lệ hoặc bị lỗi. Vui lòng hãy thử lại",
+  "user_reg_err_201": "Mật khẩu bắt buộc phải có. Vui lòng hãy thử lại",
+  "user_reg_err_202": "Tài khoản đang tồn tại. Vui lòng hãy thử Tài khoản khác",
 
   "settings_title": "Cài đặt",
   "settings_font": "Font chữ",
@@ -44,6 +106,26 @@
   "misc_font_settings": "Cài đặt Font",
   "misc_font_settings_button": "Thay đổi",
   "misc_font_settings_changed": "Đã áp dụng các sửa đổi!",
-  "misc_lang": "Ngôn ngữ"
+  "misc_lang": "Ngôn ngữ",
   
+  "reminder_signedout_info": "Không có gì ở đây... Đăng nhập để xem!",
+  "reminder_signedin_no_reminder": "Bạn không có ghi nhớ nào!\nDùng nút 'Tạo' để thêm!","reminder_dialog_label": "Tạo ghi nhớ mới",
+  "reminder_dialog_field_content": "Nội dung (TÙY CHỌN)",
+  "reminder_dialog_field_time": "Thời gian hoàn tất (TÙY CHỌN)",
+  "reminder_dialog_button_create": "Tạo mới",
+  "reminder_dialog_button_cancel": "Hủy bỏ",  
+  "reminder_dialog_error_connection": "Đã có lỗi xảy ra khi tạo mới ghi nhớ.\nNguyên nhân: Không thể liên lạc tới máy chủ!",
+  "reminder_dialog_create_success": "Ghi nhớ đã được tạo!",
+  "reminder_dialog_create_dismiss": "Bỏ qua",
+  
+  "reminder_dialog_edit_label": "Sửa đổi ghi nhớ",
+  "reminder_edit_dialog_finished_label": "Đã hoàn thành",
+  "reminder_edit_dialog_update_label": "Cập nhật",
+  "reminder_edit_dialog_delete_label": "Xóa ghi nhớ",
+  "reminder_dialog_edit_success_label": "Đã cập nhật ghi nhớ",
+  "reminder_edit_dialog_dismiss_label": "Bỏ qua",
+  "reminder_edit_dialog_deleted_message": "Đã xóa ghi nhớ",
+
+  "reminder_card_default_content": "Một ghi nhớ khiêm tốn để động viên bạn đọc vài cuốn sách 🙂"
+
 }

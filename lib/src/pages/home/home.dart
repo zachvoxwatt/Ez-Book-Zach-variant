@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ez_book/src/pages/home/widget/custom_app_bar.dart';
 import 'package:ez_book/src/pages/home/widget/movie_header.dart';
 import 'package:ez_book/src/pages/home/widget/category.dart';
-import 'package:ez_book/src/pages/home/widget/trending_movies.dart';
 import 'package:ez_book/src/settings/settings_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../size_config.dart';
@@ -90,32 +89,34 @@ class Home extends StatelessWidget {
       return AppLocalizations.of(context)!;
     }
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(
-                top: SizeConfig.screenHeight! * 0.0075,
-                left: SizeConfig.screenWidth! * 0.05,
-                right: SizeConfig.screenWidth! * 0.05),
-            child: Text(tr().tab_home,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.screenWidth! * 0.1)),
+    return GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.only(
+                    top: SizeConfig.screenHeight! * 0.0075,
+                    left: SizeConfig.screenWidth! * 0.05,
+                    right: SizeConfig.screenWidth! * 0.05),
+                child: Text(tr().tab_home,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.screenWidth! * 0.1)),
+              ),
+              CustomAppBar(settingsController: settingsController),
+              MovieHeader(
+                settingsController: settingsController,
+              ),
+              Category(settingsController: settingsController),
+              // TrendingMovies(
+              //   settingsController: settingsController,
+              // ),
+            ],
           ),
-          CustomAppBar(settingsController: settingsController),
-          MovieHeader(
-            settingsController: settingsController,
-          ),
-          Category(settingsController: settingsController),
-          TrendingMovies(
-            settingsController: settingsController,
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

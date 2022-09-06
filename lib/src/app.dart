@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:ez_book/src/blocs/language/language_bloc.dart';
+import 'package:ez_book/src/blocs/reminder/core/reminder_bloc.dart';
+import 'package:ez_book/src/blocs/reminder/focus/reminder_focus_bloc.dart';
 import 'package:ez_book/src/blocs/user/info/user_info_bloc.dart';
 import 'package:ez_book/src/pages/user/user.dart';
-import 'package:ez_book/src/services/networking.dart';
+import 'package:ez_book/src/services/repositories/reminder.dart';
 import 'package:ez_book/src/services/repositories/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +15,13 @@ import 'package:ez_book/src/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'blocs/display_settings/display_settings_bloc.dart';
 import 'blocs/ft_book/ft_book_bloc.dart';
+import 'blocs/reminder/creation/reminder_creation_bloc.dart';
+import 'blocs/reminder/timepicker/time_picker_bloc.dart';
+import 'blocs/reminder/update/reminder_update_bloc.dart';
 import 'blocs/user/account/user_acc_bloc.dart';
+import 'services/networking/book_client.dart';
+import 'services/networking/reminder_client.dart';
+import 'services/networking/user_client.dart';
 import 'services/repositories/book.dart';
 import 'settings/settings_controller.dart';
 import 'size_config.dart';
@@ -38,7 +46,9 @@ class MyApp extends StatelessWidget {
           RepositoryProvider(
               create: (context) => BookRepository(bookcl: BookClient())),
           RepositoryProvider(
-              create: (context) => UserRepository(usercl: UserClient()))
+              create: (context) => UserRepository(usercl: UserClient())),
+          RepositoryProvider(
+              create: (context) => ReminderRepository(remcl: ReminderClient()))
         ],
         child: MultiBlocProvider(
             providers: [
@@ -48,9 +58,22 @@ class MyApp extends StatelessWidget {
               BlocProvider(
                   create: (context) =>
                       UserAccountBloc(repo: context.read<UserRepository>())),
-              BlocProvider(create: (context) => UserInfoBloc()),
+              BlocProvider(
+                  create: (context) =>
+                      UserInfoBloc(repo: context.read<UserRepository>())),
+              BlocProvider(
+                  create: (context) =>
+                      ReminderBloc(repo: context.read<ReminderRepository>())),
+              BlocProvider(
+                  create: (context) => ReminderCreationBloc(
+                      repo: context.read<ReminderRepository>())),
+              BlocProvider(
+                  create: (context) => ReminderUpdateBloc(
+                      repo: context.read<ReminderRepository>())),
               BlocProvider(create: (context) => LanguageBloc()),
               BlocProvider(create: (context) => DisplaySettingsBloc()),
+              BlocProvider(create: (context) => ReminderFocusBloc()),
+              BlocProvider(create: (context) => ReminderTimePickerBloc())
             ],
             child: BlocBuilder<LanguageBloc, LanguageState>(
                 builder: (context, localeState) {

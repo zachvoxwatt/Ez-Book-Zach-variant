@@ -1,9 +1,9 @@
+import 'package:ez_book/src/blocs/user/info/user_info_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../blocs/user/account/user_acc_bloc.dart';
-import '../../models/user.dart';
 import '../../settings/settings_controller.dart';
 import '../../size_config.dart';
 import 'widgets/user_action_button.dart';
@@ -50,42 +50,96 @@ class UserSignedOutScreen extends StatelessWidget {
           child: UserLogButton(
               isRegister: false,
               settingsController: settingsController,
-              label: tr().user_signin,
+              label: tr().user_signin_button,
               color: const Color(0xffabcdef))),
       Container(
         margin: EdgeInsets.only(top: SizeConfig.screenHeight! * 0.005),
         child: UserLogButton(
             isRegister: true,
             settingsController: settingsController,
-            label: tr().user_reg,
+            label: tr().user_reg_button,
             color: const Color(0xffabcdef)),
       )
     ]);
   }
 
-  BlocBuilder userStateNotifier(BuildContext context) {
-    return BlocBuilder<UserAccountBloc, UserAccountState>(
-      builder: (context, state) {
-        if (state is UserAccountRegistrySuccess) {
-          return Container(
-              margin: EdgeInsets.only(top: SizeConfig.screenHeight! * 0.025),
-              padding: EdgeInsets.only(
-                  top: SizeConfig.screenHeight! * 0.005,
-                  bottom: SizeConfig.screenHeight! * 0.005,
-                  left: SizeConfig.screenWidth! * 0.025,
-                  right: SizeConfig.screenWidth! * 0.025),
-              decoration: BoxDecoration(
-                  color: const Color(0xff03c04a),
-                  border: Border.all(width: 2, color: const Color(0xff99edc3)),
-                  borderRadius: BorderRadius.circular(8)),
-              child: const Text(
-                'Successfully registered!\nPlease sign in to continue',
-                textAlign: TextAlign.center,
-              ));
-        }
+  Column userStateNotifier(BuildContext context) {
+    AppLocalizations tr() {
+      return AppLocalizations.of(context)!;
+    }
 
-        return const SizedBox.shrink();
-      },
-    );
+    return Column(children: [
+      BlocBuilder<UserAccountBloc, UserAccountState>(
+        builder: (context, state) {
+          if (state is UserAccountRegistrySuccess) {
+            return Container(
+                margin: EdgeInsets.only(top: SizeConfig.screenHeight! * 0.025),
+                padding: EdgeInsets.only(
+                    top: SizeConfig.screenHeight! * 0.005,
+                    bottom: SizeConfig.screenHeight! * 0.005,
+                    left: SizeConfig.screenWidth! * 0.025,
+                    right: SizeConfig.screenWidth! * 0.025),
+                decoration: BoxDecoration(
+                    color: const Color(0xff03c04a),
+                    border:
+                        Border.all(width: 2, color: const Color(0xff99edc3)),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(
+                  tr().user_reg_success,
+                  textAlign: TextAlign.center,
+                ));
+          }
+
+          return const SizedBox.shrink();
+        },
+      ),
+      BlocBuilder<UserInfoBloc, UserInfoState>(
+        builder: (context, state) {
+          if (state is UserInfoPassive) {
+            context.read<UserInfoBloc>().add(UserInfoTransformInitial());
+            return Container(
+                margin: EdgeInsets.only(top: SizeConfig.screenHeight! * 0.025),
+                padding: EdgeInsets.only(
+                    top: SizeConfig.screenHeight! * 0.005,
+                    bottom: SizeConfig.screenHeight! * 0.005,
+                    left: SizeConfig.screenWidth! * 0.025,
+                    right: SizeConfig.screenWidth! * 0.025),
+                decoration: BoxDecoration(
+                    color: const Color(0xffC58F00),
+                    border:
+                        Border.all(width: 2, color: const Color(0xffffb101)),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(
+                  tr().user_signout_msg,
+                  style: const TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ));
+          }
+
+          if (state is UserInfoDeletePassive) {
+            context.read<UserInfoBloc>().add(UserInfoTransformInitial());
+            return Container(
+                margin: EdgeInsets.only(top: SizeConfig.screenHeight! * 0.025),
+                padding: EdgeInsets.only(
+                    top: SizeConfig.screenHeight! * 0.005,
+                    bottom: SizeConfig.screenHeight! * 0.005,
+                    left: SizeConfig.screenWidth! * 0.025,
+                    right: SizeConfig.screenWidth! * 0.025),
+                decoration: BoxDecoration(
+                    color: const Color(0xffC58F00),
+                    border:
+                        Border.all(width: 2, color: const Color(0xffffb101)),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(
+                  tr().user_signout_deleted_msg,
+                  style: const TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ));
+          }
+
+          return const SizedBox.shrink();
+        },
+      )
+    ]);
   }
 }

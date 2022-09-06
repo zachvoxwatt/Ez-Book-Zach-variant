@@ -1,12 +1,12 @@
 class User {
-  final String? objectId, username, phone, displayName, sessionToken;
+  final String? objectId, username, phone, displayname, sessionToken;
 
   const User(
       {this.objectId,
       this.username,
       this.phone,
       this.sessionToken,
-      this.displayName});
+      this.displayname});
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
@@ -14,7 +14,7 @@ class User {
         username: parsedJson['username'],
         phone: parsedJson['phone'],
         sessionToken: parsedJson['sessionToken'],
-        displayName: parsedJson['displayName']);
+        displayname: parsedJson['displayname']);
   }
 
   static List<User> userlist = [
@@ -23,23 +23,35 @@ class User {
       username: 'asdfmovieguy',
       sessionToken: 'loremipsumdolorsitamet',
       phone: '098765434567890987654',
-      displayName: 'static user 1',
+      displayname: 'static user 1',
     )
   ];
 }
 
 class UserAccountRegistryErrorModel extends User {
   final String error;
+  final int errorCode;
 
-  UserAccountRegistryErrorModel({required this.error});
+  UserAccountRegistryErrorModel({required this.error, required this.errorCode});
 }
 
 class UserAccountRegistrySuccessModel extends User {}
 
 class UserAccountSignInErrorModel extends User {
-  final String errorMessage;
+  final int errorCode;
 
-  UserAccountSignInErrorModel({required this.errorMessage});
+  UserAccountSignInErrorModel({required this.errorCode});
 }
 
 class UserAccountSignInSuccessModel extends User {}
+
+class UserAccountEditSuccessModel extends User {
+  final User user;
+
+  UserAccountEditSuccessModel({required this.user});
+}
+
+class UserAccountEditFailedModel extends User {
+  final int errorCode;
+  UserAccountEditFailedModel({required this.errorCode});
+}

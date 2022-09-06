@@ -27,9 +27,71 @@
   "readview_read_now": "Read Now",
   "readview_viewcount": "Read(s)",
 
-  "user_signin": "Sign In",
-  "user_reg": "Register",
+  "user_signin_button": "Sign In",
+  "user_signin_username_label": "Username",
+  "user_signin_password_label": "Password",
+  "user_signin_signin_button_label": "Sign In",
+  "user_signin_back_button_label": "Back",
+  "user_signin_reg_alt1": "Don't have an account yet?",
+  "user_signin_reg_alt2": "Register here!",
 
+  "user_signin_err_neg1": "Could not reach the service. Please try again later!",
+  "user_signin_err_101": "Invalid username / password",
+  "user_signin_err_200": "Username is required",
+  "user_signin_err_201": "Password is required",
+
+  "user_signedin_info_label": "Your credentials information (tap to select and change your credentials):",
+  "user_signedin_username_label": "Username",
+  "user_signedin_password_label": "Password",
+  "user_signedin_displayname_label": "Display name",
+  "user_signedin_phone_label": "Phone",
+  "user_signedin_token_tip": "Session Token ID (DO NOT share this with anyone but a certified staff member!):",
+  "user_signedin_delete_option": "Purge account",
+  "user_signedin_edit_label_prefix": "Edit",
+  "user_signedin_edit_err_typo": "An error occurred. This is mainly caused by one of the following typos:\n\n\u2022 Blank spaces\n\u2022 Special characters (non-alphanumeric)\n\u2022 Incorrect input format\n\nPlease check again and retry!",
+  "user_signedin_edit_err_sameinfo": "\u2022 New value of this field can not be the current active value!\n\u2022 No changes were made",
+  "user_signedin_delete_err": "An error occurred while trying to delete your account. Please try again later!",
+  
+  "user_signedin_delete_dialog_label": "Purging account",
+  "user_signedin_delete_dialog_warn1": "Are you sure about this?",
+  "user_signedin_delete_dialog_warn2": "This action can not be undone!",
+  "user_signedin_delete_button1_label": "Proceed",
+  "user_signedin_delete_button2_label": "Back",
+
+  "user_update_err_neg1": "Could not reach the service. Please try again later!",
+  "user_update_err_202": "Account already exists for this username!",
+  
+  "user_signout_wait": "Signing out. Please wait...",
+  "user_signout_msg": "You have signed out",
+  "user_signout_button": "Sign Out",
+  "user_signout_deleted_pending": "Signing you out and deleting your account...",
+  "user_signout_deleted_msg": "Your account has been deleted",
+  
+  "user_reg_button": "Register",
+  "user_reg_cancel_button": "Cancel",
+  "user_reg_success": "Successfully registered!\nPlease sign in to continue",
+  "user_reg_username_label": "Username",
+  "user_reg_password_label": "Password",
+  "user_reg_displayname_label": "Display name",
+  "user_reg_phone_label": "Phone number (OPTIONAL)",
+  "user_reg_alt_signin_1": "Got an account?",
+  "user_reg_alt_signin_2": "Sign in here!",
+  "user_reg_err_username_length": "Username is too long or too short! It should be in between 6 - 30 characters.",
+  "user_reg_err_username_regexp": "Username contains prohibited special characters or spaces! It should only enclose alphanumeric characters, underscores and dots!",
+  "user_reg_err_username_nodata": "No input given in the Username field",
+
+  "user_reg_err_password_length": "Password is too short! It should be more than or equal to 6 characters!",
+  "user_reg_err_password_regexp": "Password contains prohibited special characters or spaces! It should only enclose alphanumeric characters, underscores and dots!",
+  "user_reg_err_password_nodata": "No input given in the Password field",
+
+  "user_reg_err_phone_foulformat": "Phone number does not match general form or has spaces! It should only contain digits and / or a plus (+) sign at the start!",
+
+  "user_reg_err_displayname_nodata": "No input given in the Display Name field",
+
+  "user_reg_err_neg1": "Could not reach the service. Please try again later!",
+  "user_reg_err_200": "Bad or missing username. Please try again",
+  "user_reg_err_201": "Password is required. Please try again",
+  "user_reg_err_202": "Account already exists for this username. Please try again",
   "settings_title": "Settings",
   "settings_font": "Font",
   "settings_fontsize": "Font size",
@@ -44,6 +106,27 @@
   "misc_font_settings": "Font Settings",
   "misc_font_settings_button": "Change",
   "misc_font_settings_changed": "Changes applied!",
-  "misc_lang": "Language"
+  "misc_lang": "Language",
   
+  "reminder_signedout_info": "There is nothing here... Sign In to view!",
+  "reminder_signedin_no_reminder": "You have none!\nTap the 'Add' button to create!",
+  "reminder_dialog_label": "Add a Reminder",
+  "reminder_dialog_field_content": "Content (OPTIONAL)",
+  "reminder_dialog_field_time": "Finish Time (OPTIONAL)",
+  "reminder_dialog_button_create": "Create",
+  "reminder_dialog_button_cancel": "Cancel",
+  "reminder_dialog_error_connection": "An error occurred while trying to add reminder. \nReason: Could not reach the service!",
+  "reminder_dialog_create_success": "Reminder created!",
+  "reminder_dialog_create_dismiss": "Dismiss",
+
+  "reminder_dialog_edit_label": "Edit Reminder",
+  "reminder_edit_dialog_finished_label": "Finished",
+  "reminder_edit_dialog_update_label": "Update",
+  "reminder_edit_dialog_delete_label": "Delete Reminder",
+  "reminder_dialog_edit_success_label": "Reminder updated",
+  "reminder_edit_dialog_dismiss_label": "Dismiss",
+  "reminder_edit_dialog_deleted_message": "Reminder deleted",
+
+
+  "reminder_card_default_content": "A humble reminder to encourage you to read some books 🙂"
 }

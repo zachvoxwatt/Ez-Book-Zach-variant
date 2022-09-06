@@ -3,7 +3,9 @@
 
 ![Ez Book](https://i.postimg.cc/VN5sZVfF/template.jpg)
 
-I'm design a responsive book app UI using flutter, There is 3 page home page that includes a horizontal category list, then a list of recommended books, then a book detail view and a book content display with text settings. MODIFIED BY: ZACH! 
+I'm design a responsive book app UI using flutter, There is 3 page home page that includes a horizontal category list, then a list of recommended books, then a book detail view and a book content display with text settings. ~MrKafiri
+
+The 3 pages left blank initially have been made more livelier by adding various functionalities like app settings, user's profile, app reminders and app's featured book screen. Heavily modified by ~Zach
 
 > Package Used :
 > - readmore

@@ -10,3 +10,13 @@ class UserInfoActive extends UserInfoState {
 
   UserInfoActive({required this.user});
 }
+
+class UserInfoPassive extends UserInfoState {}
+
+class UserInfoSignOutWaiting extends UserInfoState {}
+
+class UserInfoDeleteWaiting extends UserInfoState {}
+
+class UserInfoDeleteError extends UserInfoState {}
+
+class UserInfoDeletePassive extends UserInfoState {}

@@ -1,5 +1,5 @@
 name: ez_book
-description: A new Flutter project.
+description: A sample mobile application for modifications and achievements during my Internship. Provided by Mr. Nguyễn Quang Tuyến.
 
 # Prevent accidental publishing to pub.dev.
 publish_to: "none"
@@ -14,10 +14,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_datetime_picker: ^1.5.1
   flutter_localizations:
     sdk: flutter
   http: ^0.13.4
   intl: ^0.17.0
+  marquee: ^2.2.3
   readmore: ^2.1.0
   smooth_page_indicator: ^1.0.0+2
 

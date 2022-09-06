@@ -16,10 +16,8 @@ class BookBloc extends Bloc<BookEvent, BookState> {
 
   void onLoad(BookLoadEvent event, Emitter<BookState> emit) async {
     emit(BookLoading());
-    await Future.delayed(const Duration(seconds: 2));
-
     var hasConnection = await PingRepository.pingServer();
-
+    await Future.delayed(const Duration(seconds: 2));
     if (hasConnection) {
       List<Book> results = await repo.getBooks();
       if (results[0] is BookError) {
@@ -27,7 +25,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         return;
       }
       emit(BookPollSuccess());
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 500));
       emit(BookLoaded(books: results));
       return;
     } else {
