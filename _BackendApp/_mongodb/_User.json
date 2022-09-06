@@ -1,0 +1,30 @@
+[{
+  "username": "testguy",
+  "phone": "0955781791",
+  "_hashed_password": "$2y$10$U8UKxVgwQ2rzsk.RMQvoqeflRJAGFUPNdMD7Ga/ur6KRKpRlymNRm"
+},{
+  "username": "testguy2",
+  "displayname": "yolo",
+  "phone": "1234567890",
+  "_hashed_password": "$2y$10$aoPPjN7jye8W5ySvSsNlpuk6YGYALbiZYtJVGxd4YbmGYlOI1xJDm"
+},{
+  "username": "cheems",
+  "displayname": "cheemsS",
+  "phone": "0987654321",
+  "_hashed_password": "$2y$10$VpQM9v2b7LlTyElixbKOkeQWcawWxg09TFXZReR1/dTSRo35m6aDq"
+},{
+  "username": "yonkie",
+  "displayname": "yonk",
+  "phone": "5432167890",
+  "_hashed_password": "$2y$10$UCgCnrVOSJvPCZbkGzrtieL.i6kCRKyOvEdLZjWBSJGo9a2j4dfe2"
+},{
+  "username": "Bob",
+  "displayname": "bello",
+  "phone": "1122334455",
+  "_hashed_password": "$2y$10$O9.8GdWjl3Kp1e/zpijjHONW3jTWnHGGZAMIa15O3NkOinrHjrfCS"
+},{
+  "username": "rik4kftw",
+  "phone": "+180089831234",
+  "displayname": "rik4k - The Trance Composer",
+  "_hashed_password": "$2y$10$ND6MUz8cQzEYlBK3md28nun4PMVvp3pMqSqpryEfGUxYDgAjwC7Ci"
+}]
